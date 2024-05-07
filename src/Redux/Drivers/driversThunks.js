@@ -17,10 +17,36 @@ export const addDriver = createAsyncThunk(
   'drivers/addDriver',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('driver/addDrivers', { credentials });
+      const res = await axios.post('driver/addDriver', credentials);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteDriver = createAsyncThunk(
+  'drivers/deleteDriver',
+  async (_id, thunkAPI) => {
+    try {
+      const res = await axios.delete(`driver/deleteDriver/${_id}`);
+
+      return res.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateDriver = createAsyncThunk(
+  'driver/updateDriver',
+  async (credentials, thunkAPI) => {
+    try {
+      const res = await axios.put('driver/updateDriver', credentials);
+      console.log(credentials);
+      return res.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.message);
     }
   }
 );
