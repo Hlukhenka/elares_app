@@ -13,7 +13,7 @@ export const DashboardItem = ({ driver }) => {
 
   return (
     <Item key={driver._id} onClick={toggleModal}>
-      {showModal && (
+      {/* {showModal && (
         <Modal>
           <p>Імʼя: {driver.name}</p>
           <p>Прізвище: {driver.surname}</p>
@@ -24,7 +24,7 @@ export const DashboardItem = ({ driver }) => {
 
           <button onClick={toggleModal}>Close Modal</button>
         </Modal>
-      )}
+      )} */}
       <p>{driver.name} </p>
       <p> {driver.surname}</p>
       <p> {driver.time}</p>
