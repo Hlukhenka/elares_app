@@ -43,7 +43,6 @@ export const updateDriver = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.put('driver/updateDriver', credentials);
-      console.log(credentials);
       return res.data;
     } catch (error) {
       thunkAPI.rejectWithValue(error.message);

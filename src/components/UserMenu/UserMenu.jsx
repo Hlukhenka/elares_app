@@ -8,12 +8,12 @@ export const UserMenu = () => {
   const userSurname = useSelector(getUserSurname);
 
   return (
-    <div>
+    <UserMenu>
       <p>
         Здарова, {userName} {userSurname}
       </p>
 
       <button onClick={() => dispatch(logOut())}>Вихід</button>
-    </div>
+    </UserMenu>
   );
 };

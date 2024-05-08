@@ -5,7 +5,7 @@ export const ContainerWrapper = styled.div`
   padding: 0 10px;
 
   @media screen and (min-width: 320px) {
-    max-width: 320px;
+    max-width: 330px;
     margin: 0 auto;
   }
 

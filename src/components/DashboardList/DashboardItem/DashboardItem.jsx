@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import { deleteDriver } from '../../../Redux/Drivers/driversThunks';
 import { ButtonUpdate } from '../../ButtonUpdate/ButtonUpdate';
-import { Item } from '../DashboardList.styled';
+import { AdaptiveBox, Item } from '../DashboardItem/DashboardItem.styled';
 import { useDispatch } from 'react-redux';
-import { Modal } from '../../Modal/Modal';
+import { CgTrash } from 'react-icons/cg';
 
-export const DashboardItem = ({ driver }) => {
+export const DashboardItem = ({ driver, backgroundColor }) => {
   const [showModal, setShowModal] = useState();
   const dispatch = useDispatch();
 
   const toggleModal = () => setShowModal(!showModal);
 
   return (
-    <Item key={driver._id} onClick={toggleModal}>
+    <Item
+      key={driver._id}
+      onClick={toggleModal}
+      style={{ backgroundColor: `${backgroundColor}` }}
+    >
       {/* {showModal && (
         <Modal>
           <p>Імʼя: {driver.name}</p>
@@ -25,14 +29,19 @@ export const DashboardItem = ({ driver }) => {
           <button onClick={toggleModal}>Close Modal</button>
         </Modal>
       )} */}
-      <p>{driver.name} </p>
-      <p> {driver.surname}</p>
-      <p> {driver.time}</p>
-      <p> {driver.city}</p>
-      <p> {driver.date}</p>
-      <ButtonUpdate driver={driver}>Редагувати</ButtonUpdate>
+
+      <AdaptiveBox>
+        <p>{driver.name}</p>
+        <p> {driver.surname}</p>
+      </AdaptiveBox>
+      <AdaptiveBox>
+        <p>{driver.time}</p>
+        <p>{driver.date}</p>
+      </AdaptiveBox>
+      <p>{driver.city}</p>
+      <ButtonUpdate driver={driver} />
       <button onClick={() => dispatch(deleteDriver(driver._id))}>
-        Видалити
+        <CgTrash style={{ width: '100%', height: '100%' }} />
       </button>
     </Item>
   );

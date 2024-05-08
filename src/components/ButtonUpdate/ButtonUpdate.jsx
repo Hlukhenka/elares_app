@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { updateDriver } from '../../Redux/Drivers/driversThunks';
+import { CgPen } from 'react-icons/cg';
 
 export const ButtonUpdate = ({ driver }) => {
   const [showModal, setShowModal] = useState();
@@ -33,7 +34,7 @@ export const ButtonUpdate = ({ driver }) => {
     const { name, value } = e.currentTarget;
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
-
+  const { name, surname, date, city, time, notes } = data;
   return (
     <>
       {showModal && (
@@ -43,37 +44,37 @@ export const ButtonUpdate = ({ driver }) => {
               type="text"
               name="name"
               onChange={handleChange}
-              value={data.name}
+              value={name}
             />
             <input
               type="text"
               name="surname"
               onChange={handleChange}
-              value={data.surname}
+              value={surname}
             />
             <input
               type="text"
               name="date"
               onChange={handleChange}
-              value={data.date}
+              value={date}
             />
             <input
               type="text"
               name="city"
               onChange={handleChange}
-              value={data.city}
+              value={city}
             />
             <input
               type="text"
               name="time"
               onChange={handleChange}
-              value={data.time}
+              value={time}
             />
             <input
               type="text"
               name="notes"
               onChange={handleChange}
-              value={data.notes}
+              value={notes}
             />
 
             <button type="submit">Додати</button>
@@ -81,7 +82,9 @@ export const ButtonUpdate = ({ driver }) => {
           <button onClick={toggleModal}>Close Modal</button>
         </Modal>
       )}
-      <button onClick={toggleModal}>Редагувати</button>
+      <button onClick={toggleModal}>
+        <CgPen style={{ width: '100%', height: '100%' }} />
+      </button>
     </>
   );
 };
