@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { updateDriver } from '../../Redux/Drivers/driversThunks';
+import { CgPen } from 'react-icons/cg';
 
 export const ButtonUpdate = ({ driver }) => {
   const [showModal, setShowModal] = useState();
@@ -81,7 +82,9 @@ export const ButtonUpdate = ({ driver }) => {
           <button onClick={toggleModal}>Close Modal</button>
         </Modal>
       )}
-      <button onClick={toggleModal}>Редагувати</button>
+      <button onClick={toggleModal}>
+        <CgPen style={{ width: '100%', height: '100%' }} />
+      </button>
     </>
   );
 };

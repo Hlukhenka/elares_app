@@ -56,19 +56,6 @@ function App() {
           </Route>
         </Routes>
       )}
-
-      {/* <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-
-          <Route element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-            <Route path="dashboard" element={<DashboardList />} />
-          </Route>
-
-          
-        </Route>
-      </Routes> */}
     </AppWrapper>
   );
 }

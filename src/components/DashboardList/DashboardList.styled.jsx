@@ -7,7 +7,7 @@ export const ListWrapper = styled.div`
 
 export const List = styled.ul`
   @media screen and (min-width: 320px) {
-    width: 320px;
+    width: 330px;
   }
 
   @media screen and (min-width: 834px) {
@@ -19,10 +19,4 @@ export const List = styled.ul`
   }
 `;
 
-export const Item = styled.li`
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-  margin-bottom: 15px;
-  border: 1px solid black;
-`;
+

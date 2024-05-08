@@ -4,6 +4,8 @@ import { addDriver, fetchDrivers } from '../../Redux/Drivers/driversThunks';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Modal } from '../../components/Modal/Modal';
+import { BtnAdd, TitleBox } from './Dashboard.styled';
+import { CgAdd } from 'react-icons/cg';
 
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState();
@@ -34,17 +36,21 @@ export const Dashboard = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1>Водії</h1>
-      <button onClick={toggleModal}>додати водія</button>
+      <TitleBox>
+        <h1>Водії</h1>
+        <BtnAdd onClick={toggleModal}>
+          <CgAdd style={{ width: '100%', height: '100%' }} />
+        </BtnAdd>
+      </TitleBox>
 
       {showModal && (
         <Modal>
           <form onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder='імʼя'/>
-            <input type="text" name="surname" placeholder='прізвище'/>
-            <input type="text" name="date" placeholder='дата'/>
-            <input type="text" name="city" placeholder='місто'/>
-            <input type="text" name="time" placeholder='час'/>
+            <input type="text" name="name" placeholder="імʼя" />
+            <input type="text" name="surname" placeholder="прізвище" />
+            <input type="text" name="date" placeholder="дата" />
+            <input type="text" name="city" placeholder="місто" />
+            <input type="text" name="time" placeholder="час" />
 
             <button type="submit">Додати</button>
           </form>
