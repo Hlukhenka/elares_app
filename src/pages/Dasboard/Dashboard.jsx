@@ -12,6 +12,34 @@ export const Dashboard = () => {
   const dispatch = useDispatch();
   const [subscription, setSubscription] = useState(null);
 
+  // Запит дозволу на push-сповіщення
+  // const requestPushPermission = async () => {
+  //   if ('Notification' in window) {
+  //     const permission = await Notification.requestPermission();
+  //     if (permission === 'granted') {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // };
+
+  // const subscribeToPush = async () => {
+  //   const pushSubscription = await window.ServiceWorker.getRegistration();
+  //   if (pushSubscription) {
+  //     const pushSubscription = await pushSubscription.pushManager.subscribe({
+  //       userVisibleOnly: true,
+  //     });
+  //     return pushSubscription;
+  //   } else {
+  //     return null;
+  //   }
+  // };
+
+  // console.log(subscribeToPush());
+
   useEffect(() => {
     // Перевірка підтримки сервісу push-сповіщень в браузері
     if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -65,7 +93,7 @@ export const Dashboard = () => {
           body: JSON.stringify(subscription),
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmY2ZmJiMWJmMTRhZDY1YjYzYjc0NiIsImlhdCI6MTcxNTY4NDIzMiwiZXhwIjoxNzE1NzcwNjMyfQ.DPm2365g7teKRgBML1K2QT7Wod48QDkrz2lVchVzrTY`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmY2ZmJiMWJmMTRhZDY1YjYzYjc0NiIsImlhdCI6MTcxNTY5MTcwOSwiZXhwIjoxNzE1Nzc4MTA5fQ.fFIWed8kc08JY6tNCt3I1Af40ryQ1300KWz7dsL5qSw`,
           },
         });
         console.log('Subscription sent to server');
@@ -88,6 +116,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchDrivers());
+
   }, [dispatch]);
 
   const handleSubmit = (e) => {
