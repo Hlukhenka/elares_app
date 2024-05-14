@@ -17,7 +17,7 @@ export const Dashboard = () => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       // Реєстрація service worker
       navigator.serviceWorker
-        .register('../../../service-worker.js')
+        .register('/service-worker.js')
         .then(async (registration) => {
           // Запит на отримання підписки
           const subscription = await registration.pushManager.subscribe({
