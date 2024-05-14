@@ -10,6 +10,79 @@ import { CgAdd } from 'react-icons/cg';
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState();
   const dispatch = useDispatch();
+  const [subscription, setSubscription] = useState(null);
+
+  useEffect(() => {
+    // Перевірка підтримки сервісу push-сповіщень в браузері
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      // Реєстрація service worker
+      navigator.serviceWorker
+        .register('../../../service-worker.js')
+        .then(async (registration) => {
+          // Запит на отримання підписки
+          const subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(
+              'BM8_AkzBViTnkH-sbwWBc5PLYVo7sqg6WF-mW2tbWZl993n4VQSu-IU8TIJsH_XsNNBP6qZu5Z7-sMHw1IqntOQ'
+            ), // Публічний ключ сервера
+          });
+
+          // Встановлення підписки
+          setSubscription(subscription);
+        })
+        .catch((error) => {
+          console.error('Service worker registration failed:', error);
+        });
+    } else {
+      console.warn('Push messaging is not supported');
+    }
+  }, []);
+
+  // Функція для конвертації base64 рядка в Uint8Array
+  const urlBase64ToUint8Array = (base64String) => {
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding)
+      .replace(/-/g, '+')
+      .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  };
+
+  // Функція для відправлення підписки на сервер
+  const sendSubscriptionToServer = async () => {
+    try {
+      // Перевірка чи маємо підписку
+      if (subscription) {
+        // Відправка підписки на сервер
+        await fetch('https://elares-back.onrender.com/api/auth/subscription', {
+          method: 'PUT',
+          body: JSON.stringify(subscription),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmY2ZmJiMWJmMTRhZDY1YjYzYjc0NiIsImlhdCI6MTcxNTY4NDIzMiwiZXhwIjoxNzE1NzcwNjMyfQ.DPm2365g7teKRgBML1K2QT7Wod48QDkrz2lVchVzrTY`,
+          },
+        });
+        console.log('Subscription sent to server');
+      } else {
+        console.error('No subscription available');
+      }
+    } catch (error) {
+      console.error('Error sending subscription to server:', error);
+    }
+  };
+
+  // Виклик функції для відправлення підписки на сервер
+  useEffect(() => {
+    if (subscription) {
+      sendSubscriptionToServer();
+    }
+  }, [subscription]);
 
   const toggleModal = () => setShowModal(!showModal);
 

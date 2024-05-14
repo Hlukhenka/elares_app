@@ -2,7 +2,9 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../Redux/Auth/authThunks';
 
 export const LoginForm = () => {
+
   const dispatch = useDispatch();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +19,6 @@ export const LoginForm = () => {
       })
     );
     form.reset();
-
   };
 
   return (

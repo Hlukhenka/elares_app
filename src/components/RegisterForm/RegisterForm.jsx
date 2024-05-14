@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { register } from '../../Redux/Auth/authThunks';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
 
